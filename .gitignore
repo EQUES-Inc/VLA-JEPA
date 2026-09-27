@@ -2,3 +2,4 @@ checkpoints/*
 !checkpoints/.gitkeep
 results
 __pycache__/
+starVLA.egg-info

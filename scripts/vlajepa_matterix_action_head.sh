@@ -16,4 +16,4 @@ accelerate launch \
   --config_file ./starVLA/config/deepseeds/deepspeed_zero2.yaml \
   --num_processes 1 \
   ./starVLA/training/train_starvla.py \
-  --config_yaml ./scripts/config/vlajepa_matterix_action_head.yaml
+  --config_yaml ./scripts/configs/vlajepa_matterix_action_head.yaml

@@ -12,20 +12,38 @@ STEP1: データ収集
 STEP2: データの変換
 - `scripts/MATTERIX/convert_npz_to_lerobot_v21.py`: シミュレータで収集したデータをlerobot形式に変換
 
-STEP3: finetuningの実行
+
+STEP3: ベースモデルの用意. 
+`scripts/configs/vlajepa_matterix_action_head.yaml`内のpretrained_checkpointで指定するpathにベースモデルのcheckpointを配置する。
+
+VLA-JEPAの公式リポジトリ等から取得できる。
+
+今回は[ginwindのHuggingFace](https://huggingface.co/ginwind/VLA-JEPA/tree/main)から取得し、以下のように配置する。
+
+```
+/home/ubuntu/checkpoints/VLA-JEPA/LIBERO/checkpoints/VLA-JEPA-LIBERO.pt #最も推奨
+/home/ubuntu/checkpoints/VLA-JEPA/Real-world/checkpoints/VLA-JEPA-Real-World.pt
+/home/ubuntu/checkpoints/VLA-JEPA/Pretrain/checkpoints/VLA-JEPA-pretrain.pt
+```
+
+STEP4: finetuningの実行
 - `scripts/vlajepa_matterix_action_head.sh` を実行し、starVLAベースのfinetuningを走らせる。
 - 学習の設定は--config_yamlで指定した先のyamlファイルに詳細に記載されている（ステップサイズ、epoch数など）
   - freezeするmoduleが何になっているかに注意（推奨はaction_headとvj_predictorのみを学習する設定。yamlでは学習対象から除外=freezeするmoduleを記載することに注意。）
 
-STEP4: 学習済みモデルの確認
+STEP5: 学習済みモデルの確認
 - `checkpoints/`: finetune済みの重み置き場
 
-STEP5: 評価. 
+STEP6: 評価. 
 別途適切にMATTERIXサーバを起動させておく。（tmuxなどを活用）
 - `examples/MATTERIX/eval.sh` : 推論実行スクリプトを実行する
   - プロンプト等はコマンドオプションとして指定　（例）"Pick up the beaker"
   - `examples/MATTERIX/eval_matterix.py` : 推論実行コード本体
 
+
+## GPU環境
+
+AWS EC2のg6e.4xlargeを利用し、GPU VRAMは48GB. CUDA Versionは13.0. 
 
 
 ---

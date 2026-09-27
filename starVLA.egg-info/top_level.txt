@@ -1,5 +1,0 @@
-assets
-deployment
-examples
-scripts
-starVLA
