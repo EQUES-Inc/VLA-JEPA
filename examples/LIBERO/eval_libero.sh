@@ -1,14 +1,14 @@
 #!/bin/bash
 
 export PYTHONDONTWRITEBYTECODE=1
-export LIBERO_HOME=/home/dataset-local/LIBERO # your LIBERO code path
+export LIBERO_HOME=/home/ubuntu/LIBERO # your LIBERO code path
 export LIBERO_CONFIG_PATH=${LIBERO_HOME}/libero
 
 export PYTHONPATH=$PYTHONPATH:${LIBERO_HOME} # let eval_libero find the LIBERO tools
 export PYTHONPATH=$(pwd):${PYTHONPATH} # let LIBERO find the websocket tools from main repo
-export sim_python=/home/dataset-local/LIBERO/env/bin/python # your LIBERO conda path
+export sim_python=/home/ubuntu/miniconda3/envs/libero/bin/python # your LIBERO conda path
 
-your_ckpt=/home/dataset-local/ginwind/huggingface/VLA-JEPA/LIBERO/checkpoints/VLA-JEPA-LIBERO.pt
+your_ckpt=/home/ubuntu/checkpoints/VLA-JEPA-LIBERO.pt
 folder_name=$(echo "$your_ckpt" | awk -F'/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
 
 items=("libero_10" "libero_goal" "libero_object" "libero_spatial")

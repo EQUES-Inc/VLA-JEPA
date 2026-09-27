@@ -1,34 +1,28 @@
-# Matterix + VLA-JEPA Experiments
-
-VLA-JEPA推論側の実装。[サーバ側](https://github.com/EQUES-Inc/Matterix)
-
-
-STEP1: データ収集
-- `dataset/collect.sh` を実行. 
-- `dataset/指定したdir/successes/` 以下にnpzが指定した数保存されていることを確認。
-- debugオプションを指定していた場合は、`dataset/指定したdir/debug_frames/`から掴んでいる瞬間の撮影画像等を目視確認することができる。
-
-
-STEP2: データの変換
-- `scripts/MATTERIX/convert_npz_to_lerobot_v21.py`: シミュレータで収集したデータをlerobot形式に変換
-
-STEP3: finetuningの実行
-- `scripts/vlajepa_matterix_action_head.sh` を実行し、starVLAベースのfinetuningを走らせる。
-- 学習の設定は--config_yamlで指定した先のyamlファイルに詳細に記載されている（ステップサイズ、epoch数など）
-  - freezeするmoduleが何になっているかに注意（推奨はaction_headとvj_predictorのみを学習する設定。yamlでは学習対象から除外=freezeするmoduleを記載することに注意。）
-
-STEP4: 学習済みモデルの確認
-- `checkpoints/`: finetune済みの重み置き場
-
-STEP5: 評価. 
-別途適切にMATTERIXサーバを起動させておく。（tmuxなどを活用）
-- `examples/MATTERIX/eval.sh` : 推論実行スクリプトを実行する
-  - プロンプト等はコマンドオプションとして指定　（例）"Pick up the beaker"
-  - `examples/MATTERIX/eval_matterix.py` : 推論実行コード本体
-
-
-
----
+Metadata-Version: 2.4
+Name: starVLA
+Version: 1.0.1
+Summary: StarVLA: A Lego-like Codebase for Vision-Language-Action Model Developing .
+Author-email: Jinhui Ye <jinhuiyes@gmail.com>, Fangjing Wang <fangjing_wang@outlook.com>, Junqiu Yu <michaelyu1101@163.com>
+Keywords: vision-language-actions models, robotic manipulation,multimodal pretraining,robot learning,generative models
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: black>=24.2.0; extra == "dev"
+Requires-Dist: gpustat; extra == "dev"
+Requires-Dist: ipython; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: ruff>=0.2.2; extra == "dev"
+Provides-Extra: sagemaker
+Requires-Dist: boto3; extra == "sagemaker"
+Requires-Dist: sagemaker; extra == "sagemaker"
 
 <h3 align="center" style="font-size:48px; font-weight:bold; color:#9C276A; margin: 0;">
   <a href="https://arxiv.org/abs/2602.10098" style="color:#9C276A; text-decoration: none;">

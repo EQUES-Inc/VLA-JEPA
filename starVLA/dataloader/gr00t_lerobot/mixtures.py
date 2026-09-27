@@ -68,6 +68,8 @@ DATASET_NAMED_MIXTURES = {
     "BEHAVIOR_challenge": [
         ("BEHAVIOR_challenge", 1.0, "R1Pro"),
     ],
-
-
+    
+    "matterix_beaker": [
+        ("matterix_beaker", 1.0, "matterix_franka"),
+    ],
 }

@@ -19,7 +19,6 @@ from libero.libero.envs import OffScreenRenderEnv
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 from examples.LIBERO.model2libero_interface import M1Inference
 
-
 LIBERO_DUMMY_ACTION = [0.0] * 6 + [-1.0]
 LIBERO_ENV_RESOLUTION = 256  # resolution used to render training data
 def _binarize_gripper_open(open_val: np.ndarray | float) -> np.ndarray:
