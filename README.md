@@ -3,17 +3,19 @@
 VLA-JEPA推論側の実装。[サーバ側](https://github.com/EQUES-Inc/Matterix)
 
 
-STEP1: データ収集
+## 全体的な流れ
+
+### STEP1: データ収集
 - `dataset/collect.sh` を実行. 
 - `dataset/指定したdir/successes/` 以下にnpzが指定した数保存されていることを確認。
 - debugオプションを指定していた場合は、`dataset/指定したdir/debug_frames/`から掴んでいる瞬間の撮影画像等を目視確認することができる。
 
 
-STEP2: データの変換
+### STEP2: データの変換
 - `scripts/MATTERIX/convert_npz_to_lerobot_v21.py`: シミュレータで収集したデータをlerobot形式に変換
 
 
-STEP3: ベースモデルの用意. 
+### STEP3: ベースモデルの用意. 
 `scripts/configs/vlajepa_matterix_action_head.yaml`内のpretrained_checkpointで指定するpathにベースモデルのcheckpointを配置する。
 
 VLA-JEPAの公式リポジトリ等から取得できる。
@@ -26,15 +28,16 @@ VLA-JEPAの公式リポジトリ等から取得できる。
 /home/ubuntu/checkpoints/VLA-JEPA/Pretrain/checkpoints/VLA-JEPA-pretrain.pt
 ```
 
-STEP4: finetuningの実行
+### STEP4: finetuningの実行
 - `scripts/vlajepa_matterix_action_head.sh` を実行し、starVLAベースのfinetuningを走らせる。
 - 学習の設定は--config_yamlで指定した先のyamlファイルに詳細に記載されている（ステップサイズ、epoch数など）
   - freezeするmoduleが何になっているかに注意（推奨はaction_headとvj_predictorのみを学習する設定。yamlでは学習対象から除外=freezeするmoduleを記載することに注意。）
 
-STEP5: 学習済みモデルの確認
+### STEP5: 学習済みモデルの確認
 - `checkpoints/`: finetune済みの重み置き場
 
-STEP6: 評価. 
+### STEP6: 評価
+
 別途適切にMATTERIXサーバを起動させておく。（tmuxなどを活用）
 - `examples/MATTERIX/eval.sh` : 推論実行スクリプトを実行する
   - プロンプト等はコマンドオプションとして指定　（例）"Pick up the beaker"
