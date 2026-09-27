@@ -2,6 +2,13 @@
 
 VLA-JEPA推論側の実装。[サーバ側](https://github.com/EQUES-Inc/Matterix)
 
+## 環境構築
+
+公式のVLA-JEPAに従って環境構築を行う。
+```
+conda activate vla-jepa
+```
+
 
 ## 全体的な流れ
 

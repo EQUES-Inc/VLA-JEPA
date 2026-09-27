@@ -4,7 +4,7 @@ export PYTHONDONTWRITEBYTECODE=1
 
 export PYTHONPATH=$(pwd):${PYTHONPATH}
 
-# VLA-JEPA checkpoint
+# Picku your VLA-JEPA checkpoint
 # your_ckpt=/home/ubuntu/checkpoints/VLA-JEPA/Pretrain/checkpoints/VLA-JEPA-pretrain.pt
 # your_ckpt=/home/ubuntu/checkpoints/VLA-JEPA/LIBERO/checkpoints/VLA-JEPA-LIBERO.pt
 # your_ckpt=/home/ubuntu/checkpoints/VLA-JEPA/Real-world/checkpoints/VLA-JEPA-Real-World.pt
@@ -15,7 +15,7 @@ your_ckpt=/home/ubuntu/VLA-JEPA/checkpoints/MATTERIX_ACTION_HEAD/checkpoints/ste
 host="127.0.0.1"
 base_port=15083
 
-num_trials=50
+num_trials=1
 max_steps=400
 
 cuda_id=0
@@ -62,8 +62,8 @@ python ./examples/MATTERIX/eval_matterix.py \
     --num-trials "${num_trials}" \
     --max-steps "${max_steps}" \
     --task-description "Pick up the beaker" \
-    --with-state 
-    # --save-video  
+    --with-state \
+    --save-video  
     
 
 eval_status=$?
